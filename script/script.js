@@ -1,10 +1,20 @@
 
 const containers = document.getElementsByClassName("container");
 let container = containers[0];
-let mouseDown = false;
-document.body.onmousedown = () => mouseDown = true;
-document.body.onmouseup = () => mouseDown = false;
+const colorPicker = document.getElementById("colorpicker");
+let colour = '#000000';
+console.log(colorPicker);
 
+function separateValsColor(event){ 
+    const inputVal = event.target.value;
+    colour = inputVal;
+}
+
+function choosingColor(){
+    colorPicker.addEventListener('change', separateValsColor);
+}
+
+choosingColor();
 
 function createTable(rows, cols){
     container.style.setProperty('--grid-rows', rows);
@@ -17,22 +27,20 @@ function createTable(rows, cols){
         }
     }
 }
+
 createTable(16,16);
 const divs = container.querySelectorAll(".grid-item");
 
-
-
-function drawStuff(){
-
-    divs.forEach(div => div.addEventListener('mouseover', (e) => {
-        if(mouseDown){
-            div.setAttribute('style', 'background: black;'); 
-            console.log(e);
-        }
-    }));
+function changeBackgroundColour(e){
+    if(e.buttons === 1){
+        this.setAttribute('style', `background: ${colour};`); 
+    }
 }
 
+function drawStuff(){
+    divs.forEach(div => div.addEventListener("pointerover", changeBackgroundColour));
+    divs.forEach(div => div.addEventListener("pointerdown", changeBackgroundColour));
+    
+}
 
-
-//console.log(container);
 drawStuff();
