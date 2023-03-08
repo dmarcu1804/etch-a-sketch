@@ -1,6 +1,10 @@
 
 const containers = document.getElementsByClassName("container");
 let container = containers[0];
+let mouseDown = false;
+document.body.onmousedown = () => mouseDown = true;
+document.body.onmouseup = () => mouseDown = false;
+
 
 function createTable(rows, cols){
     container.style.setProperty('--grid-rows', rows);
@@ -13,5 +17,22 @@ function createTable(rows, cols){
         }
     }
 }
-
 createTable(16,16);
+const divs = container.querySelectorAll(".grid-item");
+
+
+
+function drawStuff(){
+
+    divs.forEach(div => div.addEventListener('mouseover', (e) => {
+        if(mouseDown){
+            div.setAttribute('style', 'background: black;'); 
+            console.log(e);
+        }
+    }));
+}
+
+
+
+//console.log(container);
+drawStuff();
