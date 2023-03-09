@@ -3,7 +3,8 @@ const containers = document.getElementsByClassName("container");
 let container = containers[0];
 const colorPicker = document.getElementById("colorpicker");
 let colour = '#000000';
-console.log(colorPicker);
+const btn = document.getElementById("reset");
+
 
 function separateValsColor(event){ 
     const inputVal = event.target.value;
@@ -24,6 +25,7 @@ function createTable(rows, cols){
         for(r = 0; r < rows; r++){
             let cell = document.createElement("div");
             container.appendChild(cell).className = "grid-item";
+            drawStuff(cell);
         }
     }
 }
@@ -31,16 +33,26 @@ function createTable(rows, cols){
 createTable(16,16);
 const divs = container.querySelectorAll(".grid-item");
 
+
 function changeBackgroundColour(e){
     if(e.buttons === 1){
         this.setAttribute('style', `background: ${colour};`); 
     }
 }
 
-function drawStuff(){
-    divs.forEach(div => div.addEventListener("pointerover", changeBackgroundColour));
-    divs.forEach(div => div.addEventListener("pointerdown", changeBackgroundColour));
-    
+function drawStuff(cell){
+    cell.addEventListener("pointerover", changeBackgroundColour);
+    cell.addEventListener("pointerdown", changeBackgroundColour);
 }
 
-drawStuff();
+
+// THIS DOESNT WORK - FIX IT
+function removeTable(){
+    container.innerHTML = '';
+    createTable(16,16);
+}
+
+function resetTable(){
+    btn.addEventListener('click', removeTable);
+}
+resetTable();
