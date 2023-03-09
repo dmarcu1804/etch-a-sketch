@@ -4,7 +4,8 @@ let container = containers[0];
 const colorPicker = document.getElementById("colorpicker");
 let colour = '#000000';
 const btn = document.getElementById("reset");
-
+let slider = document.getElementById("myRange");
+let output = document.getElementById("demo");
 
 function separateValsColor(event){ 
     const inputVal = event.target.value;
@@ -26,13 +27,13 @@ function createTable(rows, cols){
             let cell = document.createElement("div");
             container.appendChild(cell).className = "grid-item";
             drawStuff(cell);
+            
         }
     }
 }
 
-createTable(16,16);
+//createTable(16,16);
 const divs = container.querySelectorAll(".grid-item");
-
 
 function changeBackgroundColour(e){
     if(e.buttons === 1){
@@ -45,14 +46,28 @@ function drawStuff(cell){
     cell.addEventListener("pointerdown", changeBackgroundColour);
 }
 
-
-// THIS DOESNT WORK - FIX IT
+//WHEN RESET BUTTON IS PRESSED, I'D like to RECREATE TABLE WITH CURRENT SLIDER VALUE - FIX THIS  
 function removeTable(){
     container.innerHTML = '';
+
     createTable(16,16);
+    //sliderValue();
 }
 
 function resetTable(){
     btn.addEventListener('click', removeTable);
 }
+
+function sliderValue(){
+    //createTable(16,16);
+    slider.oninput = function(e) {
+        output.innerHTML = this.value;
+        container.innerHTML = '';
+        createTable(e.target.value, e.target.value);
+    }
+}
+
+createTable(16,16);
 resetTable();
+sliderValue();
+
