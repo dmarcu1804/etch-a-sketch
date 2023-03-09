@@ -49,9 +49,8 @@ function drawStuff(cell){
 //WHEN RESET BUTTON IS PRESSED, I'D like to RECREATE TABLE WITH CURRENT SLIDER VALUE - FIX THIS  
 function removeTable(){
     container.innerHTML = '';
-
-    createTable(16,16);
-    //sliderValue();
+    createTable(slider.value,slider.value);
+    sliderValue();
 }
 
 function resetTable(){
@@ -60,10 +59,10 @@ function resetTable(){
 
 function sliderValue(){
     //createTable(16,16);
-    slider.oninput = function(e) {
+    slider.oninput = function() {
         output.innerHTML = this.value;
         container.innerHTML = '';
-        createTable(e.target.value, e.target.value);
+        createTable(this.value, this.value);  
     }
 }
 
