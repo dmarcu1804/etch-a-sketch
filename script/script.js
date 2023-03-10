@@ -8,8 +8,8 @@ let slider = document.getElementById("myRange");
 let output = document.getElementById("demo");
 
 
-container.style.width = "960px";
-container.style.height = "960px";
+const CONTAINER_WIDTH = container.style.width = "1000px";
+const CONTAINER_HEIGHT = container.style.height = "1000px";
 function separateValsColor(event){ 
     const inputVal = event.target.value;
     colour = inputVal;
@@ -29,7 +29,7 @@ function createTable(rows, cols){
         let cell = document.createElement("div");
         container.appendChild(cell).className = "grid-item";
         
-        const valueWidHei = 960/rows-1;
+        const valueWidHei = 1000/rows-1;
         const finalCellWidth = cell.style.width = valueWidHei + "px";
         const finalCellHeight = cell.style.height = valueWidHei + "px";
         container.style.setProperty('--grid-width', finalCellWidth);

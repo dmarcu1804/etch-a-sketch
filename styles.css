@@ -1,6 +1,6 @@
 body{
     margin:0;
-    padding:50px;
+    padding:0px;
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -16,10 +16,8 @@ body{
   
 .container {
     display: grid;
-    max-width:960px;
-    grid-template-rows: repeat(var(--grid-rows),1fr);
-    grid-template-columns: repeat(var(--grid-cols),1fr);
-    justify-content: center;
+    grid-template-rows: repeat(var(--grid-rows),minmax(0,1fr));
+    grid-template-columns: repeat(var(--grid-cols),minmax(0,1fr));
 }
 
 .grid-item {
