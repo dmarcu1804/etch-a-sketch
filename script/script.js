@@ -7,6 +7,9 @@ const btn = document.getElementById("reset");
 let slider = document.getElementById("myRange");
 let output = document.getElementById("demo");
 
+
+container.style.width = "960px";
+container.style.height = "960px";
 function separateValsColor(event){ 
     const inputVal = event.target.value;
     colour = inputVal;
@@ -16,19 +19,22 @@ function choosingColor(){
     colorPicker.addEventListener('change', separateValsColor);
 }
 
-choosingColor();
-
+//choosingColor();
+//need to dynamically resize each cell when the rows and cols change - the drawing square has to change as well
 function createTable(rows, cols){
     container.style.setProperty('--grid-rows', rows);
     container.style.setProperty('--grid-cols', cols);
 
-    for(c = 0; c < cols; c++){
-        for(r = 0; r < rows; r++){
-            let cell = document.createElement("div");
-            container.appendChild(cell).className = "grid-item";
-            drawStuff(cell);
-            
-        }
+    for(let i = 0; i < rows * cols; i++){
+        let cell = document.createElement("div");
+        container.appendChild(cell).className = "grid-item";
+        
+        const valueWidHei = 960/rows-1;
+        const finalCellWidth = cell.style.width = valueWidHei + "px";
+        const finalCellHeight = cell.style.height = valueWidHei + "px";
+        container.style.setProperty('--grid-width', finalCellWidth);
+        container.style.setProperty('--grid-height', finalCellHeight);
+        drawStuff(cell);
     }
 }
 
@@ -46,7 +52,7 @@ function drawStuff(cell){
     cell.addEventListener("pointerdown", changeBackgroundColour);
 }
 
-//WHEN RESET BUTTON IS PRESSED, I'D like to RECREATE TABLE WITH CURRENT SLIDER VALUE - FIX THIS  
+
 function removeTable(){
     container.innerHTML = '';
     createTable(slider.value,slider.value);
@@ -66,7 +72,8 @@ function sliderValue(){
     }
 }
 
-createTable(16,16);
+createTable(slider.value,slider.value);
+choosingColor();
 resetTable();
 sliderValue();
 
